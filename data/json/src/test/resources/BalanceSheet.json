@@ -1,0 +1,74 @@
+[
+  {
+    "year"     : 2001,
+    "month"    : "January",
+    "revenue"  : 1096100,
+    "expenses" : 700495
+  },
+  {
+    "year"     : 2001,
+    "month"    : "February",
+    "revenue"  : 1107699,
+    "expenses" : 787025
+  },
+  {
+    "year"     : 2001,
+    "month"    : "March",
+    "revenue"  : 1111413,
+    "expenses" : 756127
+  },
+  {
+    "year"     : 2001,
+    "month"    : "April",
+    "revenue"  : 1142805,
+    "expenses" : 789401
+  },
+  {
+    "year"     : 2001,
+    "month"    : "May",
+    "revenue"  : 1062120,
+    "expenses" : 696636
+  },
+  {
+    "year"     : 2001,
+    "month"    : "June",
+    "revenue"  : 1049379,
+    "expenses" : 614289
+  },
+  {
+    "year"     : 2001,
+    "month"    : "July",
+    "revenue"  : 1188511,
+    "expenses" : 783190
+  },
+  {
+    "year"     : 2001,
+    "month"    : "August",
+    "revenue"  : 1192911,
+    "expenses" : 760190
+  },
+  {
+    "year"     : 2001,
+    "month"    : "September",
+    "revenue"  : 1113860,
+    "expenses" : 610055
+  },
+  {
+    "year"     : 2001,
+    "month"    : "October",
+    "revenue"  : 1088810,
+    "expenses" : 621875
+  },
+  {
+    "year"     : 2001,
+    "month"    : "November",
+    "revenue"  : 1077840,
+    "expenses" : 625026
+  },
+  {
+    "year"     : 2001,
+    "month"    : "December",
+    "revenue"  : 1179334,
+    "expenses" : 649819
+  }
+]

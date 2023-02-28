@@ -1,0 +1,11 @@
+Copyright (c) $today.year Qualitrix Technologies Pvt Ltd.  All rights reserved.
+
+This code and associated documentation files (the "Software") is the exclusive
+property of Qualitrix Technologies Pvt Ltd, a company incorporated under The
+Companies Act of India and registered in India, having its offices at #38,
+Jhansi Building, Somanna Gardens, Bangalore Karnataka 5600979, India. No part
+of this software can be distributed, copied, transmitted, transferred or
+disclosed to any party outside Qualitrix through any means. Any act of
+distribution, copying, transmission, transfer or disclosure of this code to
+any party outside Qualitrix will be deemed to be an act of criminal intent
+and will attract strict legal action under the prevailing laws of India.

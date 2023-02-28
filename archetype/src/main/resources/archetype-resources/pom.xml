@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2021-2022 Qualitrix Technologies Pvt Ltd.  All rights reserved.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of
+  ~ this software and associated documentation files (the "Software"), to use the
+  ~ Software without restriction, subject to the following conditions:
+  ~
+  ~ THE SOFTWARE MUST HAVE BEEN PROVIDED BY THE ORIGINAL AUTHORS OR AN AUTHORIZED
+  ~ SIGNATORY THEREOF. THE PERSON TO WHOM THE SOFTWARE HAS BEEN PROVIDED MAY USE IT
+  ~ FOR THE PURPOSE FOR WHICH IT HAS BEEN PROVIDED, AND EXTEND IT TO MEET THEIR
+  ~ NEEDS. HOWEVER, THE PERSON TO WHOM THE SOFTWARE HAS BEEN PROVIDED MAY NOT SELL,
+  ~ MODIFY, DISTRIBUTE, PUBLISH, MERGE, LICENSE OR SUBLICENSE IT TO ANYONE ELSE.
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+  ~ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  ~ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+  ~ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  ~ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <version>${version}</version>
+  <packaging>jar</packaging>
+
+  <name>${artifactId}</name>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!--
+          Used for enforcing coding standards.
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven.plugin.checkstyle.version}</version>
+          <configuration>
+            <configLocation>src/main/resources/checkstyle.xml</configLocation>
+            <consoleOutput>true</consoleOutput>
+            <encoding>UTF-8</encoding>
+            <failsOnError>true</failsOnError>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            <linkXRef>true</linkXRef>
+          </configuration>
+          <executions>
+            <execution>
+              <id>validate</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>com.qualitrix</groupId>
+        <artifactId>infinitum-bom</artifactId>
+        <version>${infinitum.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.qualitrix</groupId>
+      <artifactId>infinitum-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.qualitrix</groupId>
+      <artifactId>infinitum-extension-guice</artifactId>
+    </dependency>
+  </dependencies>
+
+  <profiles>
+    <profile>
+      <activation>
+        <jdk>[8,10]</jdk>
+      </activation>
+      <id>jdk-8</id>
+
+      <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+      </properties>
+    </profile>
+
+    <profile>
+      <activation>
+        <jdk>[11,13]</jdk>
+      </activation>
+      <id>jdk-11</id>
+
+      <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+      </properties>
+    </profile>
+
+    <profile>
+      <activation>
+        <jdk>[14,16]</jdk>
+      </activation>
+      <id>jdk-14</id>
+
+      <properties>
+        <maven.compiler.source>14</maven.compiler.source>
+        <maven.compiler.target>14</maven.compiler.target>
+      </properties>
+    </profile>
+
+    <profile>
+      <activation>
+        <jdk>[17,19]</jdk>
+      </activation>
+      <id>jdk-17</id>
+
+      <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+      </properties>
+    </profile>
+  </profiles>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <infinitum.version>0.1</infinitum.version>
+
+    <maven.plugin.checkstyle.version>3.1.0</maven.plugin.checkstyle.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>qualitrix</id>
+      <url>https://repository.rmgx.in/artifactory/qualitrix</url>
+    </repository>
+<!--    <snapshotRepository>-->
+<!--      <id>qualitrix</id>-->
+<!--      <url>https://repository.rmgx.in/artifactory/qualitrix</url>-->
+<!--    </snapshotRepository>-->
+  </repositories>
+</project>

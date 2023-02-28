@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2021-2022 Qualitrix Technologies Pvt Ltd.  All rights reserved.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of
+  ~ this software and associated documentation files (the "Software"), to use the
+  ~ Software without restriction, subject to the following conditions:
+  ~
+  ~ THE SOFTWARE MUST HAVE BEEN PROVIDED BY THE ORIGINAL AUTHORS OR AN AUTHORIZED
+  ~ SIGNATORY THEREOF. THE PERSON TO WHOM THE SOFTWARE HAS BEEN PROVIDED MAY USE IT
+  ~ FOR THE PURPOSE FOR WHICH IT HAS BEEN PROVIDED, AND EXTEND IT TO MEET THEIR
+  ~ NEEDS. HOWEVER, THE PERSON TO WHOM THE SOFTWARE HAS BEEN PROVIDED MAY NOT SELL,
+  ~ MODIFY, DISTRIBUTE, PUBLISH, MERGE, LICENSE OR SUBLICENSE IT TO ANYONE ELSE.
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+  ~ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  ~ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+  ~ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  ~ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.qualitrix</groupId>
+    <artifactId>infinitum</artifactId>
+    <version>0.1</version>
+  </parent>
+
+  <artifactId>infinitum-parent</artifactId>
+  <packaging>pom</packaging>
+  <name>Infinitum Parent POM</name>
+  <description>Provides external dependencies for various modules.</description>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--
+        Allows writing log messages using the SLF4J API.
+      -->
+      <dependency>
+        <groupId>ch.qos.logback</groupId>
+        <artifactId>logback-classic</artifactId>
+        <version>${logback.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.slf4j</groupId>
+        <artifactId>slf4j-api</artifactId>
+        <version>${slf4j.version}</version>
+      </dependency>
+
+      <!--
+        Provides integration with Atlassian Jira API.
+      -->
+      <dependency>
+        <groupId>com.atlassian.jira</groupId>
+        <artifactId>jira-rest-java-client-core</artifactId>
+        <version>${jira.client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.atlassian.fugue</groupId>
+        <artifactId>fugue</artifactId>
+        <version>${fugue.version}</version>
+      </dependency>
+
+      <!--
+        Enables generation of rich reports for test suites.
+      -->
+      <dependency>
+        <groupId>com.aventstack</groupId>
+        <artifactId>extentreports</artifactId>
+        <version>${extent.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+          </exclusion>
+          <exclusion>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!--
+        Used for reading data from Microsoft Excel workbooks.
+      -->
+      <dependency>
+        <groupId>com.github.ozlerhakan</groupId>
+        <artifactId>poiji</artifactId>
+        <version>${poiji.version}</version>
+      </dependency>
+
+      <!--
+        Enforces strict type checking to prevent bugs due to potential mismatch
+        of values at runtime.
+      -->
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>jsr305</artifactId>
+        <version>${google.findbugs.version}</version>
+      </dependency>
+
+      <!--
+        Used for serializing and deserializing JSON.
+      -->
+      <dependency>
+        <groupId>com.google.code.gson</groupId>
+        <artifactId>gson</artifactId>
+        <version>${gson.version}</version>
+      </dependency>
+
+      <!--
+        Provides additional functionality beyond standard JDK features.
+      -->
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${guava.version}</version>
+      </dependency>
+
+      <!--
+        Allows injecting dependencies into classes.
+      -->
+      <dependency>
+        <groupId>com.google.inject</groupId>
+        <artifactId>guice</artifactId>
+        <version>${guice.version}</version>
+      </dependency>
+
+      <!--
+        Provides integration with the Slack API.
+      -->
+      <dependency>
+        <groupId>com.slack.api</groupId>
+        <artifactId>slack-api-client</artifactId>
+        <version>${slack.api.version}</version>
+      </dependency>
+
+      <!--
+        Allows working with REST APIs.
+      -->
+      <dependency>
+        <groupId>com.squareup.okhttp3</groupId>
+        <artifactId>okhttp</artifactId>
+        <version>${okhttp.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.squareup.okio</groupId>
+        <artifactId>okio</artifactId>
+        <version>${okio.version}</version>
+      </dependency>
+
+      <!--
+        Used for reading delimited text data.
+      -->
+      <dependency>
+        <groupId>com.univocity</groupId>
+        <artifactId>univocity-parsers</artifactId>
+        <version>${univocity.version}</version>
+      </dependency>
+
+      <!--
+        Provides encoders and decoders.
+      -->
+      <dependency>
+        <groupId>commons-codec</groupId>
+        <artifactId>commons-codec</artifactId>
+        <version>${commons.codec.version}</version>
+      </dependency>
+
+      <!--
+        Provides utility functions for common input-output tasks.
+      -->
+      <dependency>
+        <groupId>commons-io</groupId>
+        <artifactId>commons-io</artifactId>
+        <version>${commons.io.version}</version>
+      </dependency>
+
+      <!--
+        Used for automating functional testing of mobile applications.
+      -->
+      <dependency>
+        <groupId>io.appium</groupId>
+        <artifactId>java-client</artifactId>
+        <version>${appium.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!--
+        Provides additional functionality beyond standard JDK features.
+      -->
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons.lang.version}</version>
+      </dependency>
+
+      <!--
+        Allows making HTTP requests.
+      -->
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpclient</artifactId>
+        <version>${http.client.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore</artifactId>
+        <version>${http.core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpcore-nio</artifactId>
+        <version>${http.core.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.httpcomponents</groupId>
+        <artifactId>httpmime</artifactId>
+        <version>${http.client.version}</version>
+      </dependency>
+
+      <!--
+        Provides integration with the Github API.
+      -->
+      <dependency>
+        <groupId>org.kohsuke</groupId>
+        <artifactId>github-api</artifactId>
+        <version>${github.client.version}</version>
+      </dependency>
+
+      <!--
+        Used for automating functional testing of web applications.
+      -->
+      <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-java</artifactId>
+        <version>${selenium.version}</version>
+        <exclusions>
+          <exclusion>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+
+      <!--
+        Used for parsing YAML files. Required only if YAML support is required
+        in the dependent project.
+      -->
+      <dependency>
+        <groupId>org.yaml</groupId>
+        <artifactId>snakeyaml</artifactId>
+        <version>${snakeyaml.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <properties>
+    <appium.version>7.6.0</appium.version>
+    <commons.codec.version>1.11</commons.codec.version>
+    <commons.io.version>2.11.0</commons.io.version>
+    <commons.lang.version>3.12.0</commons.lang.version>
+    <extent.version>4.0.6</extent.version>
+    <fugue.version>4.7.2</fugue.version>
+    <github.client.version>1.301</github.client.version>
+    <google.findbugs.version>3.0.2</google.findbugs.version>
+    <gson.version>2.8.8</gson.version>
+    <guava.version>30.1-jre</guava.version>
+    <guice.version>5.0.1</guice.version>
+    <http.client.version>4.5.13</http.client.version>
+    <http.core.version>4.4.15</http.core.version>
+    <jira.client.version>5.2.2</jira.client.version>
+    <logback.version>1.2.5</logback.version>
+    <okhttp.version>4.9.1</okhttp.version>
+    <okio.version>2.8.0</okio.version>
+    <poiji.version>3.1.3</poiji.version>
+    <selenium.version>3.141.59</selenium.version>
+    <slack.api.version>1.12.1</slack.api.version>
+    <slf4j.version>1.7.32</slf4j.version>
+    <snakeyaml.version>1.29</snakeyaml.version>
+    <univocity.version>2.9.1</univocity.version>
+  </properties>
+
+  <repositories>
+    <repository>
+      <id>atlassian</id>
+      <url>https://packages.atlassian.com/mvn/maven-external/</url>
+    </repository>
+  </repositories>
+</project>

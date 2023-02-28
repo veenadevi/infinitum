@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ~ Copyright (c) 2021-2022 Qualitrix Technologies Pvt Ltd.  All rights reserved.
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy of
+  ~ this software and associated documentation files (the "Software"), to use the
+  ~ Software without restriction, subject to the following conditions:
+  ~
+  ~ THE SOFTWARE MUST HAVE BEEN PROVIDED BY THE ORIGINAL AUTHORS OR AN AUTHORIZED
+  ~ SIGNATORY THEREOF. THE PERSON TO WHOM THE SOFTWARE HAS BEEN PROVIDED MAY USE IT
+  ~ FOR THE PURPOSE FOR WHICH IT HAS BEEN PROVIDED, AND EXTEND IT TO MEET THEIR
+  ~ NEEDS. HOWEVER, THE PERSON TO WHOM THE SOFTWARE HAS BEEN PROVIDED MAY NOT SELL,
+  ~ MODIFY, DISTRIBUTE, PUBLISH, MERGE, LICENSE OR SUBLICENSE IT TO ANYONE ELSE.
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+  ~ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+  ~ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+  ~ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+  ~ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+  -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.qualitrix</groupId>
+  <artifactId>infinitum</artifactId>
+  <version>0.1</version>
+  <packaging>pom</packaging>
+
+  <name>Infinitum</name>
+  <description>Java libraries for writing automated functional and integration tests.</description>
+
+  <organization>
+    <name>Qualitrix Technologies Pvt Ltd</name>
+    <url>https://www.qualitrix.com</url>
+  </organization>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!--
+          Used for enforcing coding standards.
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven.plugin.checkstyle.version}</version>
+          <configuration>
+            <configLocation>archetype/src/main/resources/archetype-resources/src/main/resources/checkstyle.xml</configLocation>
+            <consoleOutput>true</consoleOutput>
+            <encoding>UTF-8</encoding>
+            <failsOnError>true</failsOnError>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+            <linkXRef>true</linkXRef>
+          </configuration>
+          <executions>
+            <execution>
+              <id>validate</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!--
+          Used for packaging JAR modules.
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven.plugin.jar.version}</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>test-jar</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!--
+          Used for generating Javadoc documentation.
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-javadoc-plugin</artifactId>
+          <version>${maven.plugin.javadoc.version}</version>
+          <configuration>
+            <show>private</show>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>javadoc</goal>
+              </goals>
+              <phase>package</phase>
+            </execution>
+          </executions>
+        </plugin>
+
+        <!--
+          Used for running unit and integration tests.
+        -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>${maven.plugin.surefire.version}</version>
+          <configuration>
+            <!--suppress UnresolvedMavenProperty -->
+            <argLine>${unit-test-agent}</argLine>
+            <failIfNoTests>false</failIfNoTests>
+            <useSystemClassLoader>false</useSystemClassLoader>
+            <includes>
+              <include>**/*Suite.class</include>
+              <include>**/*Test.class</include>
+              <include>**/*Tests.class</include>
+            </includes>
+          </configuration>
+        </plugin>
+
+        <!--
+          Used for measuring and reporting code coverage during unit and
+          integration testing.
+        -->
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${maven.plugin.jacoco.version}</version>
+          <executions>
+            <execution>
+              <id>pre-test</id>
+              <goals>
+                <goal>prepare-agent</goal>
+              </goals>
+              <configuration>
+                <destFile>${project.build.directory}/coverage-reports/jacoco/unit-tests.exec</destFile>
+                <propertyName>unit-test-agent</propertyName>
+              </configuration>
+            </execution>
+            <execution>
+              <id>post-test</id>
+              <phase>test</phase>
+              <goals>
+                <goal>report</goal>
+              </goals>
+              <configuration>
+                <dataFile>${project.build.directory}/coverage-reports/jacoco/unit-tests.exec</dataFile>
+                <outputDirectory>${project.reporting.outputDirectory}/jacoco/unit-tests</outputDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <dependencyManagement>
+    <dependencies>
+      <!--
+        Allows creating mocks for testing.
+      -->
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-api-mockito2</artifactId>
+        <version>${powermock.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.powermock</groupId>
+        <artifactId>powermock-module-testng</artifactId>
+        <version>${powermock.version}</version>
+      </dependency>
+
+      <!--
+        Used for running tests.
+      -->
+      <dependency>
+        <groupId>org.testng</groupId>
+        <artifactId>testng</artifactId>
+        <version>${testng.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-api-mockito2</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.powermock</groupId>
+      <artifactId>powermock-module-testng</artifactId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+    </dependency>
+  </dependencies>
+
+  <distributionManagement>
+    <repository>
+      <id>qualitrix</id>
+      <url>https://repository.rmgx.in/artifactory/qualitrix</url>
+    </repository>
+    <snapshotRepository>
+      <id>qualitrix</id>
+      <url>https://repository.rmgx.in/artifactory/qualitrix</url>
+    </snapshotRepository>
+  </distributionManagement>
+
+  <modules>
+    <module>parent</module>
+    <module>core</module>
+    <module>config</module>
+    <module>data</module>
+    <module>issue-tracking</module>
+    <module>logging</module>
+    <module>notification</module>
+    <module>reporting</module>
+    <module>extension</module>
+    <module>bom</module>
+    <module>example</module>
+    <module>archetype</module>
+
+  </modules>
+
+  <profiles>
+    <!--
+      Runs unit and integrating tests without forking the JVM so that they can
+      be run in DEBUG mode inside an IDE.
+    -->
+    <profile>
+      <activation>
+        <activeByDefault>false</activeByDefault>
+      </activation>
+      <id>unforked-tests</id>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <configuration>
+              <forkCount>0</forkCount>
+              <reuseForks>false</reuseForks>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <properties>
+    <maven.compiler.source>8</maven.compiler.source>
+    <maven.compiler.target>8</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <jacoco.version>0.8.6</jacoco.version>
+    <powermock.version>2.0.7</powermock.version>
+    <testng.version>7.4.0</testng.version>
+
+    <maven.plugin.checkstyle.version>3.1.0</maven.plugin.checkstyle.version>
+    <maven.plugin.jacoco.version>${jacoco.version}</maven.plugin.jacoco.version>
+    <maven.plugin.jar.version>3.2.0</maven.plugin.jar.version>
+    <maven.plugin.javadoc.version>3.2.0</maven.plugin.javadoc.version>
+    <maven.plugin.surefire.version>2.22.2</maven.plugin.surefire.version>
+  </properties>
+</project>
